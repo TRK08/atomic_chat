@@ -17,7 +17,7 @@
       <transition>
         <span class="chat__input--loading" v-if="isLoading">Росатом бот обрабатывает ваш вопрос ...</span>
       </transition>
-      <a-input-search v-model:value="userInput" :disbled="isLoading" placeholder="Задайте вопрос" size="large"
+      <a-input-search v-model:value="userInput" :disabled="isLoading" placeholder="Задайте вопрос" size="large"
         @search="sendMessage">
         <template #enterButton>
           <a-button style="background-color: #0057b8; color: #fff"
