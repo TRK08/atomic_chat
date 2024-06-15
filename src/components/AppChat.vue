@@ -78,8 +78,8 @@ const sendMessage = async (val: any) => {
   try {
     const { data } = await axios.post('https://endless-presently-basilisk.ngrok-free.app/api/answer_question/', { text: val })
 
+    userInput.value = ''
     if (data) {
-      userInput.value = ''
       messages.value.push({
         id: messages.value.length + 1,
         instruction: data.instruction,
