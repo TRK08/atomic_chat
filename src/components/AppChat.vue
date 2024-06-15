@@ -72,14 +72,14 @@ const sendMessage = async (val: any) => {
     instruction: val,
     type: 'user'
   })
-
   isLoading.value = true
-  userInput.value = ''
+
 
   try {
     const { data } = await axios.post('https://endless-presently-basilisk.ngrok-free.app/api/answer_question/', { text: val })
 
     if (data) {
+      userInput.value = ''
       messages.value.push({
         id: messages.value.length + 1,
         instruction: data.instruction,
