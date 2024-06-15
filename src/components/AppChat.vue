@@ -33,6 +33,7 @@
 import { nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
 import AppMessage from './AppMessage.vue'
 import axios from 'axios';
+import { notification } from 'ant-design-vue';
 
 const userInput = ref('')
 const chatBodyRef = ref<null | HTMLDivElement>(null)
@@ -76,7 +77,7 @@ const sendMessage = async (val: any) => {
   userInput.value = ''
 
   try {
-    const { data } = await axios.post('https://endless-presently-basilisk.ngrok-free.app/api/answer_question/', { text: val })
+    const { data } = await axios.post('/api/answer_question/', { text: val })
 
     if (data) {
       messages.value.push({
@@ -88,8 +89,11 @@ const sendMessage = async (val: any) => {
     }
   } catch (error) {
     console.log('error', error)
+    notification.error({
+      message: 'При запросе произошла ошибка',
+      duration: 3.5,
+    });
   } finally {
-
     isLoading.value = false
   }
 }
@@ -116,9 +120,7 @@ onBeforeMount(() => {
   scrollToBottom()
 
   messagesFromStore.value = JSON.parse(localStorage.getItem('chat_messages') || '[]')
-  console.log('messagesFromStore', messagesFromStore.value.length)
   if (messagesFromStore.value.length > 0) {
-    console.log('123321', 123321)
     isRestoringChat.value = true
   }
 })
