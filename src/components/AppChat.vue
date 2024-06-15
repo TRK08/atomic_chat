@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { nextTick, onBeforeMount, ref, watch } from 'vue'
 import AppMessage from './AppMessage.vue'
 import axios from 'axios';
 import { notification } from 'ant-design-vue';
@@ -77,7 +77,7 @@ const sendMessage = async (val: any) => {
   userInput.value = ''
 
   try {
-    const { data } = await axios.post('/api/answer_question/', { text: val })
+    const { data } = await axios.post('https://endless-presently-basilisk.ngrok-free.app/api/answer_question/', { text: val })
 
     if (data) {
       messages.value.push({
